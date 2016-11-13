@@ -1,0 +1,15 @@
+*.iml
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/captures
+*.apk
+*.ap_
+*.dex
+*.class
+.idea/
+.gradle/
+build/
+local.properties
+app/lint.xml
+app/proguard-project.txt
