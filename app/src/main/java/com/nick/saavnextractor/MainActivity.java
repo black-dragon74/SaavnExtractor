@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -26,54 +27,80 @@ import java.net.URI;
  * Created by Nick on 12-Nov-16.
  */
 public class MainActivity extends AppCompatActivity {
+    public int STORAGE_PERMISSION_CODE =23 ;
     public static final String logtag = "Nick";
     public String extension = "";
+
+    private boolean isPermissionAllowed(){
+        int a = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (a == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        return false;
+    }
+
+    private void requestPermission(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Info");
+            builder.setMessage("Storage Permission is required to write the song on your storage.\nPlease allow it.");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+            builder.setPositiveButton("i understand", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                    // Ask Permission
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        }
+        else {
+            // First run Permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == STORAGE_PERMISSION_CODE){
+            if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                // Continue App
+            }else{
+                // Exit App
+                // But show a message first.
+                AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                dlg.setTitle("Fatal");
+                dlg.setMessage("App can't run without permissions.\nExiting.");
+                dlg.setIcon(android.R.drawable.ic_dialog_alert);
+                dlg.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity.this.finish();
+                        System.exit(0);
+                    }
+                });
+                AlertDialog d = dlg.create();
+                d.setCanceledOnTouchOutside(false);
+                d.show();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_copy);
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Error");
-            builder.setMessage("App can't run without permissions.\nPlease grant permissions first.");
-            builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // Don't Finish activity
-                    // Instead, Ask for permission.
-                    dialogInterface.dismiss();
-                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 23);
-                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 23);
-                    // Now Check if user gave the permission
-                    int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-                    if (result == PackageManager.PERMISSION_GRANTED){
-                        // Continue with the app.
-                        dialogInterface.dismiss();
-                    }
-                    else if (result == PackageManager.PERMISSION_DENIED){
-                        AlertDialog.Builder bld = new AlertDialog.Builder(MainActivity.this);
-                        bld.setTitle("Fatal Error");
-                        bld.setMessage("Permission Denied. Exiting");
-                        bld.setIcon(android.R.drawable.ic_dialog_alert);
-                        bld.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                                MainActivity.this.finish();
-                            }
-                        });
-                        AlertDialog dialog = bld.create();
-                        dialog.setCanceledOnTouchOutside(false);
-                        dialog.show();
-                    }
-                }
-            });
-            builder.setIcon(android.R.drawable.ic_dialog_alert);
-            AlertDialog dialog = builder.create();
-            dialog.show();
+        // Check permissions
+        if (isPermissionAllowed()){
+            // Continue
         }
-
+        else{
+            requestPermission();
+        }
         Button mButton;
         final EditText mText;
 
