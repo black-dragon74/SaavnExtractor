@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                 // Proceed
                                 if (saavnsong.renameTo(songname)) {
                                     // Operation Successful
-                                    logger.setText("File Mp3 Not Copied.");
+                                    logger.setText("File Mp3 Copied.");
                                     Log.v(logtag, "File Mp3 Copied.");
                                 } else {
                                     // Operation Failed
