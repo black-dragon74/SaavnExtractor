@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
                         String saavndir = sdcard+"/Android/data/com.saavn.android";
                         File saavnsong = new File (saavndir+"/songs/curr.mp3");
                         File saavnsong2 = new File (saavndir+"/songs/curr.mp4");
-                        String outdir = sdcard + "/Music";
-                        File  songname = new File (outdir+"/"+mText.getText().toString()+extension);
+                        final String outdir = sdcard + "/Music";
+                        final File  songname = new File (outdir+"/"+mText.getText().toString()+extension);
 
                         try {
                             if (saavnsong.exists()) {
@@ -150,6 +150,33 @@ public class MainActivity extends AppCompatActivity {
                                     // Operation Successful
                                     logger.setText("File Mp3 Copied.");
                                     Log.v(logtag, "File Mp3 Copied.");
+                                    Toast.makeText(MainActivity.this, "Song saved as:-"+"\n"+outdir+"/"+mText.getText().toString()+extension, Toast.LENGTH_LONG).show();
+                                    // Ask if the song is to be played.
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setTitle("Confirm");
+                                    builder.setMessage("Play "+mText.getText().toString()+extension+"?");
+                                    builder.setIcon(android.R.drawable.ic_dialog_alert);
+                                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent intent = new Intent();
+                                            intent.setAction(Intent.ACTION_VIEW);
+                                            intent.setDataAndType(Uri.fromFile(songname), "audio/*");
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                            mText.setText(null);
+                                            mText.requestFocus();
+                                            Toast.makeText(MainActivity.this, "Okay! No Problem.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    AlertDialog dlg = builder.create();
+                                    dlg.setCanceledOnTouchOutside(false);
+                                    dlg.show();
                                 } else {
                                     // Operation Failed
                                     logger.setText("File Mp3 Not Copied.");
@@ -163,6 +190,33 @@ public class MainActivity extends AppCompatActivity {
                                     // Successful
                                     logger.setText("File MP4 copied.");
                                     Log.v(logtag, "File MP4 copied.");
+                                    Toast.makeText(MainActivity.this, "Song saved as:-"+"\n"+outdir+"/"+mText.getText().toString()+extension, Toast.LENGTH_LONG).show();
+                                    // Ask if the song is to be played.
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setTitle("Confirm");
+                                    builder.setMessage("Play "+mText.getText().toString()+extension+"?");
+                                    builder.setIcon(android.R.drawable.ic_dialog_alert);
+                                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent intent = new Intent();
+                                            intent.setAction(Intent.ACTION_VIEW);
+                                            intent.setDataAndType(Uri.fromFile(songname), "video/*");
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                            mText.setText(null);
+                                            mText.requestFocus();
+                                            Toast.makeText(MainActivity.this, "Okay! No Problem.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    AlertDialog dlg = builder.create();
+                                    dlg.setCanceledOnTouchOutside(false);
+                                    dlg.show();
                                 }
                                 else{
                                     // Failed
