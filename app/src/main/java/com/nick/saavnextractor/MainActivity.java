@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Error");
             builder.setMessage("App can't run without permissions.\nPlease grant permissions first.");
-            builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     MainActivity.this.finish();
+                    System.exit(0);
                 }
             });
             builder.setIcon(android.R.drawable.ic_dialog_alert);
