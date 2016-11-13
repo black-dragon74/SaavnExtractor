@@ -5,17 +5,17 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="343dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20px"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/info_message"
         android:textAllCaps="false"
         android:id="@+id/textView"
-        android:layout_weight="0.08"
         android:textColor="#FF00"
         android:textIsSelectable="false"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
     </Button>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="343dp"
         android:layout_height="94dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#008000"
@@ -69,6 +69,7 @@
         android:textStyle="bold"
         android:id="@+id/logview"
         android:layout_marginTop="20pt"
+        android:layout_gravity="center_horizontal"
         android:gravity="center">
     </TextView>
 </LinearLayout>
