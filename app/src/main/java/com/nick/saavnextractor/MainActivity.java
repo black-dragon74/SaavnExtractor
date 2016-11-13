@@ -2,9 +2,13 @@ package com.nick.saavnextractor;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 
 
 import java.io.File;
+import java.net.URI;
 
 /**
  * Created by Nick on 12-Nov-16.
@@ -32,19 +37,42 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Error");
             builder.setMessage("App can't run without permissions.\nPlease grant permissions first.");
-            builder.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    MainActivity.this.finish();
-                    System.exit(0);
+                    // Don't Finish activity
+                    // Instead, Ask for permission.
+                    dialogInterface.dismiss();
+                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 23);
+                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 23);
+                    // Now Check if user gave the permission
+                    int result = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+                    if (result == PackageManager.PERMISSION_GRANTED){
+                        // Continue with the app.
+                        dialogInterface.dismiss();
+                    }
+                    else if (result == PackageManager.PERMISSION_DENIED){
+                        AlertDialog.Builder bld = new AlertDialog.Builder(MainActivity.this);
+                        bld.setTitle("Fatal Error");
+                        bld.setMessage("Permission Denied. Exiting");
+                        bld.setIcon(android.R.drawable.ic_dialog_alert);
+                        bld.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                MainActivity.this.finish();
+                            }
+                        });
+                        AlertDialog dialog = bld.create();
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.show();
+                    }
                 }
             });
             builder.setIcon(android.R.drawable.ic_dialog_alert);
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 23);
-        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 23);
 
         Button mButton;
         final EditText mText;
