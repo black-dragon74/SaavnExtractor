@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Saavn Extractor</string>
-    <string name="info_message">Before clicking on button make sure you have downloaded the song, played it and paused it.</string>
+    <string name="info_message">Note: Saavn Pro subscription is required in order to save songs in Saavn app.</string>
     <string name="dialog_title_help">Program Help</string>
     <string name="dialog_text_help">In order to save songs from this app, you need to have Saavn Pro. \n \n
     Download the song you want to save.\n \n

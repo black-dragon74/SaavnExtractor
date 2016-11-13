@@ -15,6 +15,7 @@
         android:textColor="#FF00"
         android:textIsSelectable="false"
         android:textStyle="bold"
+        android:gravity="center"
         android:layout_gravity="center_horizontal" />
 
     <EditText

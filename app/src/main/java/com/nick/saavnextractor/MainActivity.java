@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 extension=".mp4";
             }
             else{
-                logger.setText("Song not found. Saavn not installed or you forgot to download, play & pause the song.");
+                logger.setText("Song not found. You forgot to download, play & pause the song.");
             }
         }
         catch (Exception e){
