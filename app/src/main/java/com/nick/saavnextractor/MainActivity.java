@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
     public void showAbout(){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(getString(R.string.dialog_title_about));
-        builder.setMessage((getString(R.string.dialog_text_about)));
+        builder.setMessage((getString(R.string.dialog_text_about))+"Version: "+BuildConfig.VERSION_NAME);
         String positiveText = getString(android.R.string.ok);
         builder.setPositiveButton(positiveText, new DialogInterface.OnClickListener() {
             @Override
