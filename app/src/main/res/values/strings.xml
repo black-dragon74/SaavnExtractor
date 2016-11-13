@@ -3,12 +3,12 @@
     <string name="info_message">Before clicking on button make sure you have downloaded the song, played it and paused it.</string>
     <string name="dialog_title_help">Program Help</string>
     <string name="dialog_text_help">In order to save songs from this app, you need to have Saavn Pro. \n \n
-    1. Download the song you want to save.\n \n
-    2. Play that song in Saavn App. \n \n
-    3. Pause that song in Saavn App.\n \n
-    4. Open this App.\n \n
-    5. Enter the song name and click Save Song.\n \n
-    6. Your song will be saved in Music folder on SDCARD.\n
+    Download the song you want to save.\n \n
+    Play that song in Saavn App. \n \n
+    Pause that song in Saavn App.\n \n
+    Open this App.\n \n
+    Enter the song name and click Save Song.\n \n
+    Your song will be saved in Music folder on SDCARD.\n
     \n
     Thank You!
     </string>
