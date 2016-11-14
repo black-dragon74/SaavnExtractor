@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withIcon(GoogleMaterial.Icon.gmd_home);
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("About").withIcon(GoogleMaterial.Icon.gmd_info).withSelectable(false);
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Help").withIcon(GoogleMaterial.Icon.gmd_help).withSelectable(false);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Source Code").withIcon(FontAwesome.Icon.faw_github);
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Source Code").withIcon(FontAwesome.Icon.faw_github).withSelectable(false);
 
 
 
@@ -162,8 +162,9 @@ public class MainActivity extends AppCompatActivity {
                                 showHelp();
                                 break;
                             case 4 :
-                                showInfo("Info","Item 4 is clicked.");
-                                toolbar.setTitle(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse("https://github.com/black-dragon74/SaavnExtractor"));
+                                startActivity(i);
                                 break;
                             default :
                                 break;
