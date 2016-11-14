@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        Toast.makeText(MainActivity.this, "Hehe! You're tickling me ;)", Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 })
