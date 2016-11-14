@@ -43,17 +43,6 @@
         android:layout_width="195dp"
         android:layout_height="20pt"
         android:layout_marginTop="10pt"
-        android:text="About"
-        android:layout_gravity="center_horizontal"
-        android:clickable="true"
-        android:layout_weight="0.20"
-        android:id="@+id/aboutbtn">
-    </Button>
-
-    <Button
-        android:layout_width="195dp"
-        android:layout_height="20pt"
-        android:layout_marginTop="10pt"
         android:text="Help"
         android:layout_weight="0.20"
         android:layout_gravity="center_horizontal"
