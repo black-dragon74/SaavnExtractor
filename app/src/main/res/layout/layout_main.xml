@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/info_message"
+        android:textAllCaps="false"
+        android:id="@+id/textView"
+        android:textColor="#FF00"
+        android:textIsSelectable="false"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:id="@+id/edittext"
+        android:enabled="true"
+        android:inputType="textCapWords"
+        android:hint="Enter Song Name Without Extension">
+    </EditText>
+
+    <Button
+        android:layout_width="195dp"
+        android:layout_height="20pt"
+        android:layout_marginTop="10pt"
+        android:text="Save Song"
+        android:clickable="true"
+        android:id="@+id/savebtn"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.20">
+    </Button>
+
+    <Button
+        android:layout_width="195dp"
+        android:layout_height="20pt"
+        android:layout_marginTop="10pt"
+        android:text="About"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:layout_weight="0.20"
+        android:id="@+id/aboutbtn">
+    </Button>
+
+    <Button
+        android:layout_width="195dp"
+        android:layout_height="20pt"
+        android:layout_marginTop="10pt"
+        android:text="Help"
+        android:layout_weight="0.20"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:id="@+id/helpbtn">
+    </Button>
+
+    <TextView
+        android:layout_width="343dp"
+        android:layout_height="94dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#008000"
+        android:text="Hello"
+        android:textStyle="bold"
+        android:id="@+id/logview"
+        android:layout_marginTop="20pt"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+    </TextView>
+</LinearLayout>
