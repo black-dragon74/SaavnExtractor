@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -123,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withIcon(GoogleMaterial.Icon.gmd_home);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Settings").withIcon(GoogleMaterial.Icon.gmd_settings);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Info").withIcon(GoogleMaterial.Icon.gmd_info);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Flower").withIcon(GoogleMaterial.Icon.gmd_local_florist);
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("About").withIcon(GoogleMaterial.Icon.gmd_info);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Help").withIcon(GoogleMaterial.Icon.gmd_help);
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Source Code").withIcon(FontAwesome.Icon.faw_github);
 
 
 
