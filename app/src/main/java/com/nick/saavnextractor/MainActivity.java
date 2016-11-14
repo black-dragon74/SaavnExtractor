@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import java.io.File;
 import java.net.URI;
@@ -94,6 +106,73 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_copy);
+        // Initiate Material Drawer
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Nick").withEmail("nickk.2974@gmail.com").withIcon(R.drawable.usericon)
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withIcon(GoogleMaterial.Icon.gmd_home);
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Settings").withIcon(GoogleMaterial.Icon.gmd_settings);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Info").withIcon(GoogleMaterial.Icon.gmd_info);
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Flower").withIcon(GoogleMaterial.Icon.gmd_local_florist);
+
+
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
+        Drawer result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withTranslucentStatusBar(true)
+                .withAccountHeader(headerResult)
+                .withActionBarDrawerToggle(true)
+                .addDrawerItems(
+                        item1,
+                        item2,
+                        item3,
+                        item4
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+                        switch (position){
+                            case 1 :
+                                Toast.makeText(MainActivity.this,"You CLicked Item 1",Toast.LENGTH_SHORT).show();
+                                showInfo("Info","Item 1 is clicked");
+                                toolbar.setTitle(R.string.app_name);
+                                break;
+                            case 2 :
+                                Toast.makeText(MainActivity.this,"You Clicked Item 2",Toast.LENGTH_SHORT).show();
+                                showInfo("Info","Item 2 is clicked");
+                                toolbar.setTitle(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 3 :
+                                showInfo("Info","Item 3 is clicked");
+                                toolbar.setTitle(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 4 :
+                                showInfo("Info","Item 4 is clicked.");
+                                toolbar.setTitle(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            default :
+                                break;
+                        }
+                        return false;
+                    }
+                }).withDrawerWidthDp(220)
+                .build();
         // Check permissions
         if (isPermissionAllowed()){
             // Continue
@@ -288,6 +367,23 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    private void showInfo(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dlg = builder.create();
+        dlg.setCanceledOnTouchOutside(false);
+        dlg.show();
+
     }
 
 
