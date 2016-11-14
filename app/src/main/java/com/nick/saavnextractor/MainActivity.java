@@ -151,12 +151,9 @@ public class MainActivity extends AppCompatActivity {
                         // do something with the clicked item :D
                         switch (position){
                             case 1 :
-                                Toast.makeText(MainActivity.this,"You CLicked Item 1",Toast.LENGTH_SHORT).show();
-                                showInfo("Info","Item 1 is clicked");
                                 toolbar.setTitle(R.string.app_name);
                                 break;
                             case 2 :
-                                toolbar.setTitle(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 showAbout();
                                 toolbar.setTitle(R.string.app_name);
                                 break;
