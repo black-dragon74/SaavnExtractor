@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withIcon(GoogleMaterial.Icon.gmd_home);
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("About").withIcon(GoogleMaterial.Icon.gmd_info).withSelectable(false);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Help").withIcon(GoogleMaterial.Icon.gmd_help);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Help").withIcon(GoogleMaterial.Icon.gmd_help).withSelectable(false);
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Source Code").withIcon(FontAwesome.Icon.faw_github);
 
 
@@ -161,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
                                 toolbar.setTitle(R.string.app_name);
                                 break;
                             case 3 :
-                                showInfo("Info","Item 3 is clicked");
-                                toolbar.setTitle(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                toolbar.setTitle(R.string.app_name);
+                                showHelp();
                                 break;
                             case 4 :
                                 showInfo("Info","Item 4 is clicked.");
@@ -317,15 +317,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-            mButton = (Button) findViewById(R.id.helpbtn);
-            mButton.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            showHelp();
-                        }
-                    }
-            );
+
     }
 
     public void showHelp(){
