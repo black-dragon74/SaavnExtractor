@@ -351,22 +351,5 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void showInfo(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog dlg = builder.create();
-        dlg.setCanceledOnTouchOutside(false);
-        dlg.show();
-
-    }
-
 
 }
