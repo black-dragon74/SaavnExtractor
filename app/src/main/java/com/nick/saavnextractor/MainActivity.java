@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -159,9 +160,12 @@ public class MainActivity extends AppCompatActivity {
                                 showHelp();
                                 break;
                             case 4 :
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse("https://github.com/black-dragon74/SaavnExtractor"));
-                                startActivity(i);
+                                CustomTabsIntent intent = new CustomTabsIntent.Builder()
+                                        .setToolbarColor(getResources().getColor(R.color.colorPrimary))
+                                        .setSecondaryToolbarColor(getResources().getColor(R.color.colorPrimaryDark))
+                                        .build();
+                                String url = "https://github.com/black-dragon74/SaavnExtractor";
+                                intent.launchUrl(MainActivity.this, Uri.parse(url));
                                 break;
                             default :
                                 break;
