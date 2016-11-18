@@ -1,9 +1,12 @@
 package com.nick.saavnextractor;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -160,9 +163,18 @@ public class MainActivity extends AppCompatActivity {
                                 showHelp();
                                 break;
                             case 4 :
+                                // Add share button to action bar of Custom Tabs
+                                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_share);
+                                Intent i = new Intent(Intent.ACTION_SEND);
+                                i.setType("text/*");
+                                i.putExtra(Intent.EXTRA_TEXT, "Hello there." +
+                                        " Check out an awesome app to save Saavn Songs by Nick (black.dragon74)" +
+                                        " on GitHub:-\nhttps://github.com/black-dragon74/SaavnExtractor");
+                                PendingIntent ii = PendingIntent.getActivity(MainActivity.this, 100, i, PendingIntent.FLAG_UPDATE_CURRENT);
                                 CustomTabsIntent intent = new CustomTabsIntent.Builder()
                                         .setToolbarColor(getResources().getColor(R.color.colorPrimary))
                                         .setSecondaryToolbarColor(getResources().getColor(R.color.colorPrimaryDark))
+                                        .setActionButton(bmp, "Share App", ii, true)
                                         .build();
                                 String url = "https://github.com/black-dragon74/SaavnExtractor";
                                 intent.launchUrl(MainActivity.this, Uri.parse(url));
