@@ -9,12 +9,12 @@ android {
             storePassword 'RmKey74Sch'
         }
     }
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.nick.saavnextractor"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 20
         versionName "1.2-release"
         project.ext.set("archivesBaseName", "Saavn Extractor by Nick");
@@ -33,7 +33,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
     compile('com.mikepenz:materialdrawer:5.7.0@aar') {
         transitive = true
 
@@ -41,5 +41,5 @@ dependencies {
     compile "com.mikepenz:iconics-core:2.8.1@aar"
     compile 'com.mikepenz:google-material-typeface:2.2.0.3.original@aar'
     compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
-    compile 'com.android.support:customtabs:24.2.1'
+    compile 'com.android.support:customtabs:25.0.1'
 }
