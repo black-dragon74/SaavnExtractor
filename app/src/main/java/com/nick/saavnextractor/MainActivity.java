@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.ActivityCompat;
@@ -243,6 +245,12 @@ public class MainActivity extends AppCompatActivity {
                                     logger.setText("File Mp3 Copied.");
                                     Log.v(logtag, "File Mp3 Copied.");
                                     Toast.makeText(MainActivity.this, "Song saved as:-"+"\n"+outdir+"/"+mText.getText().toString()+extension, Toast.LENGTH_LONG).show();
+                                    // Notify Media Storage
+                                    MediaScannerConnection.scanFile(MainActivity.this, new String[]{songname.toString()}, null, new MediaScannerConnection.OnScanCompletedListener(){
+                                        public void onScanCompleted(String path, Uri uri){
+                                            Log.v(logtag, "Media Scanner Notified");
+                                        }
+                                    });
                                     // Ask if the song is to be played.
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                     builder.setTitle("Confirm");
@@ -283,6 +291,12 @@ public class MainActivity extends AppCompatActivity {
                                     logger.setText("File MP4 copied.");
                                     Log.v(logtag, "File MP4 copied.");
                                     Toast.makeText(MainActivity.this, "Song saved as:-"+"\n"+outdir+"/"+mText.getText().toString()+extension, Toast.LENGTH_LONG).show();
+                                    // Notify Media Storage
+                                    MediaScannerConnection.scanFile(MainActivity.this, new String[]{songname.toString()}, null, new MediaScannerConnection.OnScanCompletedListener(){
+                                        public void onScanCompleted(String path, Uri uri){
+                                            Log.v(logtag, "Media Scanner Notified");
+                                        }
+                                    });
                                     // Ask if the song is to be played.
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                     builder.setTitle("Confirm");
