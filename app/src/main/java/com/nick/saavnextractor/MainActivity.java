@@ -11,6 +11,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
@@ -117,7 +118,20 @@ public class MainActivity extends AppCompatActivity {
             canExit = true;
             Toast.makeText(getBaseContext(), "Press BACK again to exit.", Toast.LENGTH_SHORT).show();
         }
+        mHandler.sendEmptyMessageDelayed(1,2000);
     }
+
+    public Handler mHandler = new Handler(){
+      public void handleMessage(android.os.Message msg){
+          switch (msg.what){
+              case 1 :
+                  canExit = false;
+                  break;
+              default:
+                  break;
+          }
+      }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
