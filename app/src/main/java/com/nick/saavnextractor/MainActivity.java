@@ -106,6 +106,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Press BACK twice to exit.
+    Boolean canExit = false;
+    @Override
+    public void onBackPressed() {
+        if (canExit){
+            super.onBackPressed();
+        }
+        else{
+            canExit = true;
+            Toast.makeText(getBaseContext(), "Press BACK again to exit.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
