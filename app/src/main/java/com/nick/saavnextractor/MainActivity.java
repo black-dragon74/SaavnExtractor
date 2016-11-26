@@ -270,7 +270,31 @@ public class MainActivity extends AppCompatActivity {
                     d.show();
                 }
                 else{
-                    // TODO
+                    // Tell user that App is not installed.
+                    AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+                    b.setTitle("Error");
+                    b.setIcon(android.R.drawable.ic_dialog_alert);
+                    b.setMessage("App not found. Install from store?");
+                    // Open Store if user selects Yes.
+                    b.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent appInstall = new Intent(Intent.ACTION_VIEW);
+                            appInstall.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            appInstall.setData(Uri.parse("http://play.google.com/store/apps/details?id="+appDomain));
+                            startActivity(appInstall);
+                        }
+                    });
+                    // Do nothing if user selects No.
+                    b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog dd = b.create();
+                    dd.setCanceledOnTouchOutside(false);
+                    dd.show();
                 }
             }
         }
