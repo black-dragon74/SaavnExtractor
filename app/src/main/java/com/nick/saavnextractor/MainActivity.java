@@ -247,6 +247,32 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 logger.setText("Song not found. You forgot to download, play & pause the song.");
+                // Ask to open saavn. Only if App is Installed
+                final String appDomain = "com.saavn.android";
+                if (isAppInstalled(getBaseContext(), appDomain)){
+                    AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+                    b.setTitle("Open App");
+                    b.setIcon(android.R.drawable.ic_menu_help);
+                    b.setMessage("Saavn App is installed but paused song not found.\nDo you want me to open the app now?");
+                    b.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            openApp(getBaseContext(), appDomain);
+                        }
+                    });
+                    b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog d = b.create();
+                    d.setCanceledOnTouchOutside(false);
+                    d.show();
+                }
+                else{
+                    // TODO
+                }
             }
         }
         catch (Exception e){
