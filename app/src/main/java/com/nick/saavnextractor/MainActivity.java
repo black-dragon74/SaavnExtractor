@@ -369,6 +369,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        mButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(getBaseContext(), "Resetting program.", Toast.LENGTH_SHORT).show();
+                MainActivity.this.finish();
+                Intent res = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(res);
+                return false;
+            }
+        });
 
     }
 
