@@ -435,5 +435,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public boolean isAppInstalled(Context context, String appName){
+        PackageManager mgr = context.getPackageManager();
+        try{
+            mgr.getPackageInfo(appName, PackageManager.GET_ACTIVITIES);
+            return true;
+        }
+        catch (PackageManager.NameNotFoundException e){
+            return false;
+        }
+    }
+
 
 }
