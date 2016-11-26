@@ -2,6 +2,7 @@ package com.nick.saavnextractor;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -413,6 +414,25 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    public static boolean openApp(Context context, String appName){
+        PackageManager manager = context.getPackageManager();
+        try{
+            Intent i = manager.getLaunchIntentForPackage(appName);
+            if (i == null){
+                throw new PackageManager.NameNotFoundException();
+            }
+            else{
+                i.addCategory(Intent.CATEGORY_LAUNCHER);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+                return true;
+            }
+        }
+        catch (PackageManager.NameNotFoundException e){
+            return false;
+        }
     }
 
 
