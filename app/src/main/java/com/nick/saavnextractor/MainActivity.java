@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return false;
                     }
-                }).withDrawerWidthDp(220)
+                }).withDrawerWidthDp(290)
                 .build();
         // Check permissions
         if (isPermissionAllowed()){
